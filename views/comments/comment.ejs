@@ -1,0 +1,7 @@
+<form action="/blogs/<%= blog._id %>/comments/" method="POST">
+  <label for="text">Text:</label>
+  <input type="text" name=comment[text] placeholder="type your comment">
+  <label for="author">Author:</label>
+  <input type="text" name=comment[author] placeholder="type your name">
+  <input type="submit" value="Add comment!">
+</form>
