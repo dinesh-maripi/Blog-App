@@ -40,4 +40,10 @@ app.use('/', indexRoutes);
 app.use('/blogs/', blogRoutes);
 app.use('/blogs/:id/comments', commentRoutes);
 
+
+//Root route
+app.use('/', (req, res) => {
+  res.redirect('/blogs');
+})
+
 app.listen(3000, () => console.log('Server started listening at port 3000'));
