@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const Blog = require('../models/Blog');
+
 
 //Root route
 router.get('/', (req, res) => {
@@ -90,5 +90,5 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-module.exports = router;
 
+module.exports = router;

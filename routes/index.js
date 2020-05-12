@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const User = require('../models/User');
 const passport = require('passport');
-
 
 //Registrations routes
 router.get('/register', (req, res) => {
@@ -13,7 +11,7 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
     if (err) {
-      console.log(`Failed to register user! with name ${req.body.username}`);
+      console.log('Failed to register user!');
     } else {
       passport.authenticate('local')(req, res, (err, user) => {
         if (err) {
@@ -42,7 +40,6 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 })
 
-
 //Middleware
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -51,6 +48,5 @@ function isLoggedIn(req, res, next) {
     res.redirect('/login');
   }
 }
-
 
 module.exports = router;

@@ -1,6 +1,5 @@
 const express = require('express');
-const router = express.Router();
-
+const router = express.Router({ mergeParams: true });
 const Blog = require('../models/Blog');
 const Comment = require('../models/Comment');
 
@@ -40,6 +39,7 @@ router.post('/blogs/:id/comments', isLoggedIn, (req, res) => {
   })
 })
 
+
 //Middleware
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -48,5 +48,6 @@ function isLoggedIn(req, res, next) {
     res.redirect('/login');
   }
 }
+
 
 module.exports = router;
