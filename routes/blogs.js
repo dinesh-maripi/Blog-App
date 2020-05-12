@@ -2,14 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Blog = require('../models/Blog');
 
-
-//Root route
-router.get('/', (req, res) => {
-  res.redirect('/blogs');
-})
-
 //Index route
-router.get('/blogs', (req, res) => {
+router.get('/', (req, res) => {
   Blog.find({}, (err, blogs) => {
     if (err) {
       console.log(err);
@@ -20,11 +14,11 @@ router.get('/blogs', (req, res) => {
 })
 
 //New route
-router.get('/blogs/new', isLoggedIn, (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   res.render('blogs/new');
 })
 
-router.post('/blogs', isLoggedIn, (req, res) => {
+router.post('/', isLoggedIn, (req, res) => {
   const blog = req.body.blog;
   // console.log(blog);
   Blog.create(blog, (err, newBlog) => {
@@ -38,7 +32,7 @@ router.post('/blogs', isLoggedIn, (req, res) => {
 
 
 //Show route
-router.get('/blogs/:id', isLoggedIn, (req, res) => {
+router.get('/:id', isLoggedIn, (req, res) => {
   Blog.findById(req.params.id).populate('comments').exec((err, blog) => {
     if (err) {
       console.log('Blog not found!');
@@ -49,7 +43,7 @@ router.get('/blogs/:id', isLoggedIn, (req, res) => {
 })
 
 //edit route
-router.get('/blogs/:id/edit', isLoggedIn, (req, res) => {
+router.get('/:id/edit', isLoggedIn, (req, res) => {
   Blog.findById(req.params.id, (err, blog) => {
     if (err) {
       console.log(err);
@@ -59,7 +53,7 @@ router.get('/blogs/:id/edit', isLoggedIn, (req, res) => {
   })
 })
 
-router.put('/blogs/:id', isLoggedIn, (req, res) => {
+router.put('/:id', isLoggedIn, (req, res) => {
   Blog.findOneAndUpdate({ _id: req.params.id }, req.body.blog, (err, updateBlog) => {
     if (err) {
       console.log('Failed to update the blog!')
@@ -70,7 +64,7 @@ router.put('/blogs/:id', isLoggedIn, (req, res) => {
 })
 
 //Delete route
-router.delete('/blogs/:id/', isLoggedIn, (req, res) => {
+router.delete('/:id/', isLoggedIn, (req, res) => {
   Blog.findOneAndDelete({ _id: req.params.id }, (err, deletedBlog) => {
     if (err) {
       console.log(err);

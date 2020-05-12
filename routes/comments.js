@@ -4,7 +4,7 @@ const Blog = require('../models/Blog');
 const Comment = require('../models/Comment');
 
 //Comment Routes
-router.get('/blogs/:id/comments/new', isLoggedIn, (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   Blog.findOne({ _id: req.params.id }, (err, blog) => {
     if (err) {
       console.log(err);
@@ -14,7 +14,7 @@ router.get('/blogs/:id/comments/new', isLoggedIn, (req, res) => {
   })
 });
 
-router.post('/blogs/:id/comments', isLoggedIn, (req, res) => {
+router.post('/', isLoggedIn, (req, res) => {
   Blog.findById(req.params.id, (err, blog) => {
     if (err) {
       console.log('Failed to find a blog');

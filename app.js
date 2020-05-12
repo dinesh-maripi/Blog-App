@@ -36,8 +36,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-app.use(indexRoutes);
-app.use(blogRoutes);
-app.use(commentRoutes);
+app.use('/', indexRoutes);
+app.use('/blogs/', blogRoutes);
+app.use('/blogs/:id/comments', commentRoutes);
 
 app.listen(3000, () => console.log('Server started listening at port 3000'));
